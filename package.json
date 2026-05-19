@@ -1,0 +1,35 @@
+{
+  "name": "ecommerce-website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "env-cmd -f .env.local next dev",
+    "dev:staging": "env-cmd -f .env.staging next dev",
+    "build": "env-cmd -f .env.staging next build",
+    "start": "env-cmd -f .env.staging next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "axios": "^1.13.6",
+    "crypto-js": "^4.2.0",
+    "env-cmd": "^11.0.0",
+    "lucide-react": "^0.575.0",
+    "next": "16.1.6",
+    "next-seo": "^7.2.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "sass": "^1.97.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/crypto-js": "^4.2.2",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
