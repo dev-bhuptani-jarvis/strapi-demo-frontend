@@ -1,5 +1,6 @@
 import apiClient from "lib/axios";
 import { ProductsResponse } from "types/product.types";
+import { noCacheHeaders } from "./auth.service";
 
 export const getProducts = async ({
     page = 1,
@@ -32,7 +33,8 @@ export const getProducts = async ({
     }
 
     const response = await apiClient.get<never, ProductsResponse>(
-        query.replace(/\s+/g, "")
+        query.replace(/\s+/g, ""),
+        noCacheHeaders
     );
 
     return response;
@@ -45,7 +47,8 @@ export const getProductBySlug = async (
         never,
         ProductsResponse
     >(
-        `/products?filters[slug][$eq]=${slug}&populate=*`
+        `/products?filters[slug][$eq]=${slug}&populate=*`,
+        noCacheHeaders
     );
 
     return response.data?.[0] || null;
@@ -56,7 +59,8 @@ export const getFeaturedProducts = async () => {
         never,
         ProductsResponse
     >(
-        `/products?populate=*&pagination[pageSize]=4&sort=createdAt:desc`
+        `/products?populate=*&pagination[pageSize]=4&sort=createdAt:desc`,
+        noCacheHeaders
     );
 
     return response;

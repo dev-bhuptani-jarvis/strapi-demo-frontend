@@ -1,8 +1,10 @@
+import { noCacheHeaders } from "services/auth.service";
 import axiosInstance from "../../lib/axios";
 
 export const getProducts = async () => {
     const response = await axiosInstance.get(
-        "/products?populate=*"
+        "/products?populate=*",
+        noCacheHeaders
     );
 
     return response.data;
@@ -12,7 +14,8 @@ export const getProductBySlug = async (
     slug: string
 ) => {
     const response = await axiosInstance.get(
-        `/products?filters[slug][$eq]=${slug}&populate=*`
+        `/products?filters[slug][$eq]=${slug}&populate=*`,
+        noCacheHeaders
     );
 
     return response.data;

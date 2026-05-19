@@ -9,6 +9,14 @@ export interface AuthResponse {
     };
 }
 
+export const noCacheHeaders = {
+    headers: {
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        Pragma: "no-cache",
+        Expires: "0",
+    },
+};
+
 export interface CurrentUser {
     id: number;
     username: string;
@@ -30,7 +38,8 @@ export const registerUser = async (
             username,
             email,
             password,
-        }
+        },
+        noCacheHeaders
     );
 };
 
@@ -43,10 +52,11 @@ export const loginUser = async (
         {
             identifier,
             password,
-        }
+        },
+        noCacheHeaders
     );
 };
 
 export const getCurrentUser = async () => {
-    return apiClient.get<never, CurrentUser>("/users/me");
+    return apiClient.get<never, CurrentUser>("/users/me", noCacheHeaders);
 };

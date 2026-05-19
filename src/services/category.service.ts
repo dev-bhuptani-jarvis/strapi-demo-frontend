@@ -1,5 +1,6 @@
 import apiClient from "lib/axios";
 import { CategoriesResponse } from "types/category.types";
+import { noCacheHeaders } from "./auth.service";
 
 export const getCategories = async (): Promise<CategoriesResponse> => {
     try {
@@ -7,7 +8,8 @@ export const getCategories = async (): Promise<CategoriesResponse> => {
             never,
             CategoriesResponse
         >(
-            "/categories"
+            "/categories",
+            noCacheHeaders
         );
 
         return response;
@@ -34,7 +36,8 @@ export const getCategoryBySlug = async (
                     "filters[slug][$eq]": slug,
                     populate: "*",
                 },
-            }
+                ...noCacheHeaders
+            },
         );
 
         return response.data?.[0] || null;

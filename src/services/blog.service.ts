@@ -1,4 +1,5 @@
 import apiClient from "lib/axios";
+import { noCacheHeaders } from "./auth.service";
 
 export const getBlogs = async () => {
     try {
@@ -8,7 +9,8 @@ export const getBlogs = async () => {
                 params: {
                     populate: "*",
                 },
-            }
+                ...noCacheHeaders
+            },
         );
         return response.data;
     } catch (error) {
@@ -34,10 +36,9 @@ export const getBlogBySlug = async (
                     "filters[slug][$eq]": slug,
                     populate: "*",
                 },
-            }
+                ...noCacheHeaders
+            },
         );
-
-        console.log('response', response)
 
         return (
             response?.data?.[0] || null
