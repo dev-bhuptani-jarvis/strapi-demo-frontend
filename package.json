@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "env-cmd -f .env.local next dev",
     "dev:staging": "env-cmd -f .env.staging next dev",
-    "build": "env-cmd -f .env.staging next build",
+    "build": "next build",
     "start": "env-cmd -f .env.staging next start",
     "lint": "eslint ."
   },
