@@ -6,7 +6,7 @@
     "dev": "env-cmd -f .env.local next dev",
     "dev:staging": "env-cmd -f .env.staging next dev",
     "build": "next build",
-    "start": "env-cmd -f .env.staging next start",
+    "start": "next start",
     "lint": "eslint ."
   },
   "dependencies": {
