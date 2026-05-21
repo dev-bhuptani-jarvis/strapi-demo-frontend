@@ -1,23 +1,61 @@
-import apiClient from "lib/axios";
-import { noCacheHeaders } from "./auth.service";
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export async function getHomePage() {
-    const response = await apiClient.get("/pages", {
-        params: {
-            "filters[slug][$eq]": "home",
-            "populate[sections][populate]": "*",
-        },
-        ...noCacheHeaders
-    });
+    try {
+        const response = await fetch(
+            `${API_URL}/api/pages?filters[slug][$eq]=home&populate[sections][populate]=*`,
+            {
+                next: {
+                    revalidate: 60,
+                },
+            }
+        );
 
-    return response.data?.[0] ?? null;
+        if (!response.ok) {
+            throw new Error(
+                "Failed to fetch homepage"
+            );
+        }
+
+        const data = await response.json();
+
+        return data?.data?.[0] ?? null;
+    } catch (error) {
+        console.error(
+            "Error fetching homepage:",
+            error
+        );
+
+        return null;
+    }
 }
 
-export const getGlobalTheme = async () => {
-    const response = await apiClient.get(
-        `/global-themes?populate=*`,
-        noCacheHeaders
-    );
+export async function getGlobalTheme() {
+    try {
+        const response = await fetch(
+        `${API_URL}/api/global-themes?populate=*`,
+            {
+                next: {
+                    revalidate: 60,
+                },
+            }
+        );
 
-    return response.data?.[0] ?? null;
+        if (!response.ok) {
+            throw new Error(
+                "Failed to fetch global theme"
+            );
+        }
+
+        const data = await response.json();
+
+        return data?.data?.[0] ?? null;
+    } catch (error) {
+        console.error(
+            "Error fetching global theme:",
+            error
+        );
+
+        return null;
+    }
 }

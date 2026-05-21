@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import DynamicZone from "../components/DynamicZone";
 import {
   getGlobalTheme,
