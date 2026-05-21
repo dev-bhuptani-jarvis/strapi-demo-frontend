@@ -42,7 +42,7 @@ export default async function ProductsPage() {
                         >
                             <div className="relative h-72 overflow-hidden bg-stone-100">
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${product.images.url}`}
+                                    src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${product.images.url}`}
                                     alt={product.title}
                                     fill
                                     unoptimized

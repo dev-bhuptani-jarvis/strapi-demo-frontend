@@ -1,7 +1,8 @@
 import apiClient from "lib/axios";
+import { BlogsResponse } from "types/blog.types";
 import { noCacheHeaders } from "./auth.service";
 
-export const getBlogs = async () => {
+export const getBlogs = async (): Promise<BlogsResponse> => {
     try {
         const response = await apiClient.get(
             "/blogs",
@@ -19,9 +20,7 @@ export const getBlogs = async () => {
             error
         );
 
-        return {
-            data: [],
-        };
+        return [];
     }
 };
 

@@ -67,7 +67,7 @@ export default async function ProductDetailPage({
                 <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
                     <div className="relative min-h-[32rem] overflow-hidden rounded-[2rem] border border-stone-200 bg-white shadow-sm">
                         <Image
-                            src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${product.images.url}`}
+                            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${product.images.url}`}
                             alt={product.title}
                             fill
                             unoptimized

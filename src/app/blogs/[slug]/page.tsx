@@ -1,14 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image";
 import Link from "next/link";
-import { getBlogBySlug } from "services/blog.service";
+import { notFound } from "next/navigation";
+import {
+    getBlogBySlug,
+    getBlogs,
+} from "services/blog.service";
 
-import { Blog } from "types/blog.types";
+import {
+    Blog,
+    BlogsResponse,
+} from "types/blog.types";
 
 interface Props {
     params: Promise<{
         slug: string;
     }>;
+}
+
+export async function generateStaticParams() {
+    const blogs: BlogsResponse = await getBlogs();
+
+    return blogs.map((blog) => ({
+        slug: blog.slug,
+    }));
 }
 
 export default async function BlogDetailPage({
@@ -19,13 +34,7 @@ export default async function BlogDetailPage({
     const blog: Blog = await getBlogBySlug(slug);
 
     if (!blog) {
-        return (
-            <main className="flex min-h-screen items-center justify-center">
-                <h1 className="text-4xl font-bold">
-                    Blog Not Found
-                </h1>
-            </main>
-        );
+        notFound();
     }
 
     return (
